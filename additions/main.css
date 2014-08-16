@@ -1,0 +1,160 @@
+/* 
+    Created on : 15.08.2014, 20:45:19
+    Author     : Gero
+*/
+
+/* Media Query for Mobile Browsers */
+@media (max-width: 401px) {
+    html, body {
+        padding: 5px;
+        margin: 0;
+    }
+
+    .datawrapper, .searchwrapper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .item_box {
+        background-image: url(../img/background.png);
+        background-size: 100% 100%;
+        padding: 13px;
+        color: white;
+    }
+
+    .searchwrapper {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .searchform input[type=text] {
+        width: 99% !important;
+        margin-bottom: 10px;
+    }
+
+    .searchform input[type=submit] {
+        width: 100%;
+    }
+
+    h3 > sup {
+        display: none;
+    }
+}
+
+/* Media Query for Desktop Browsers */
+@media (min-width: 402px) {
+    .datawrapper, .searchwrapper {
+        width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .item_box {
+        background-image: url(../img/background.png);
+        background-size: 100% 100%;
+        display: inline-block;
+        padding: 13px;
+        width: 192px;
+        margin: 10px;
+        color: white;
+    }
+
+    .searchform input[type=text] {
+        width: 825px;
+    }
+
+    .searchform input[type=submit] {
+        width: 100px;
+    }
+}
+
+html, body {
+    font-family: Calibri;
+}
+
+.header_legendary {
+    color: #55FFFF;
+}
+
+.header_unique {
+    color: #FFAA00;
+}
+
+.header_rare {
+    color: #AA00AA;
+}
+
+.header_special {
+    color: #5555FF;
+}
+
+.item_box {
+    margin-bottom: 10px;
+}
+
+.searchform {
+    margin-bottom: 20px;
+}
+
+.error {
+    color: #FF5555;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.id_box {
+    display: none;
+}
+
+h1, h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+}
+
+searchform input{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0;
+}
+
+.searchform input[type=text] {
+    height: 30px;
+    border: 1px solid #CCC;
+    color: #888;
+    line-height: 20px;
+    margin-right: 6px;
+    margin-top: 2px;
+    outline: 0 none;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;    
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.searchform input[type=submit] {
+    height: 35px;
+    background: #FFF;
+    border: 1px solid #CCC;
+    color: #333;
+    border-radius: 4px;
+}
+
+.searchform input[type=submit]:hover {
+    color: #333;
+    background-color: #0266C8;
+    border-color: #ADADAD;
+    color: white;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+h3 > sup {
+    font-size: 20px;
+}
