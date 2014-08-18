@@ -8,15 +8,15 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="additions/jquery.qtip.min.js"></script>
         <script src="additions/main.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     </head>
     <body>
         <div class="searchwrapper">
             <h3>Wynncraft Item Database<sup>Made by Empty2k12 for the Wynncraft Content Contest</sup></h3> 
             <p class="search_desc">You  may search either by name, minimum level or type:</p> 
-            <form  method="post" action="index.php" class="searchform"> 
-                <input  type="text" name="query"> 
-                <input  type="submit" name="submit" value="Search"> 
+            <form  method="get" action="index.php" class="searchform"> 
+                <input type="text" name="query"> 
+                <input type="submit" value="Find"> 
             </form> 
         </div>
 
@@ -24,47 +24,54 @@
             <?php
             error_reporting(0);
 
-            if (isset($_GET['query'])) {
-                $returnedJson = file_get_contents('http://api.wynncraft.com/public_api.php?action=items&command=' . $_GET['query'] . '');
-            } else if (isset($_POST['query'])) {
-                $returnedJson = file_get_contents('http://api.wynncraft.com/public_api.php?action=items&command=' . $_POST['query'] . '');
-            } else {
-                $returnedJson = file_get_contents('http://api.wynncraft.com/public_api.php?action=items&command=');
-            }
+            $returnedJson = get_page_contents('http://api.wynncraft.com/public_api.php?action=items&command=' . urlencode($_GET['query']) . '');
+
             $decoded = json_decode($returnedJson, true);
 
             if (array_key_exists('0', $decoded)) {
                 $numBox = 0;
-                foreach ($decoded as $encoded) {
-                    $type = $encoded['item_mineraft'];
+                foreach ($decoded as $item) {
+                    $type = $item['item_mineraft'];
 
                     if (isset($type)) {
                         echo '<div class="item_box" id="box' . $numBox . '">';
-
-                        echo '<h1 title="' . $encoded['item_type'] . ' Item" class="header_' . strtolower($encoded['item_type']) . '">' . $encoded['item_name'] . "</h1>";
-                        echo $encoded['item_mineraft'] . "<br>";
-                        if (isset($encoded['item_min_lvl'])) {
-                            echo "Min Level: " . $encoded['item_min_lvl'] . "<br>";
+                        echo '<h1 title="' . $item['item_type'] . ' Item" class="header_' . strtolower($item['item_type']) . '">' . $item['item_name'] . "</h1>";
+                        echo $item['item_mineraft'] . "<br>";
+                        if (isset($item['item_min_lvl'])) {
+                            echo "Min Level: " . $item['item_min_lvl'] . "<br>";
                         }
 
                         if ($type === "Shovel" || $type === "Bow" || $type === "Shears" || $type === "Stick") {
-                            echo $encoded['max_dam'] . "-" . $encoded['min_dam'];
+                            echo $item['max_dam'] . "-" . $item['min_dam'];
                         } else {
-                            if (isset($encoded['def'])) {
-                                echo "Defense: " . $encoded['def'];
+                            if (isset($item['def'])) {
+                                echo "Defense: " . $item['def'];
                             }
                         }
-                        
-                        echo '</div>'; 
-                        
+                        echo '</div>';
+
                         echo '<div class="id_box box' . $numBox . 'id">';
-                        echo "Health Regen: " . $encoded['identification']['health_regen'] . "<br>";
-                        echo "Mana Regen: " . $encoded['identification']['mana_regen'] . "<br>";
-                        echo "Spell Damage: " . $encoded['identification']['spell_dam'] . "<br>";
-                        echo "Life Steal: " . $encoded['identification']['life_steal'] . "<br>";
-                        echo "Mana Steal: " . $encoded['identification']['mana_steal'] . "<br>";
-                        echo "XP Bonus: " . $encoded['identification']['ex_bonus'] . "<br>";
-                        echo "Loot Bonus: " . $encoded['identification']['loot_bonus'] . "<br>";
+                        if (isset($item['identification']['health_regen'])) {
+                            echo "Health Regen: " . $item['identification']['health_regen'] . "<br>";
+                        }
+                        if (isset($item['identification']['mana_regen'])) {
+                            echo "Mana Regen: " . $item['identification']['mana_regen'] . "<br>";
+                        }
+                        if (isset($item['identification']['spell_dam'])) {
+                            echo "Spell Damage: " . $item['identification']['spell_dam'] . "<br>";
+                        }
+                        if (isset($item['identification']['life_steal'])) {
+                            echo "Life Steal: " . $item['identification']['life_steal'] . "<br>";
+                        }
+                        if (isset($item['identification']['mana_steal'])) {
+                            echo "Mana Steal: " . $item['identification']['mana_steal'] . "<br>";
+                        }
+                        if (isset($item['identification']['exp_bonus'])) {
+                            echo "XP Bonus: " . $item['identification']['exp_bonus'] . "<br>";
+                        }
+                        if (isset($item['identification']['loot_bonus'])) {
+                            echo "Loot Bonus: " . $item['identification']['loot_bonus'] . "<br>";
+                        }
                         echo '</div>';
 
                         $numBox++;
@@ -73,7 +80,24 @@
             } else {
                 echo "<p class='error'>Your Query didn't return any items :( Try another search!</p>";
             }
+
+            function get_page_contents($url) {
+                if (function_exists('curl_init')) {
+                    $ch = curl_init($url);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    @curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                    curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+                    return curl_exec($ch);
+                } else {
+                    return file_get_contents($url);
+                }
+            }
             ?>
+        </div>
+
+        <div class="footerwrapper">
+            <center>&copy; 2014 Empty2k12 &bull; All Rights Reserved &bull; <a href="http://forums.wynncraft.com/threads/1-7-10-wynncraft-gui-mod-update-1-2.42548/">My Wynncraft Mod</a></center>
         </div>
     </body>
 </html>
+
