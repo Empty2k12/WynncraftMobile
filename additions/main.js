@@ -3,7 +3,8 @@ function initTooltips() {
         jQuery(this).qtip({
             content: {
                 title: "Identification Data",
-                text: jQuery("." + this.id + "id").html()
+                text: jQuery("." + this.id + "id").html(),
+                button: "&cross;"
             },
             show: 'click',
             hide: 'unfocus',

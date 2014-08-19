@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <title>Wynncraft Mobile Item Database</title>
         <link rel="stylesheet" href="additions/main.css" type="text/css"/>
-        <link rel="stylesheet" href="additions/jquery.qtip.min.css" type="text/css"/>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="additions/jquery.qtip.min.js"></script>
         <script src="additions/main.js"></script>
@@ -13,7 +12,7 @@
     <body>
         <div class="searchwrapper">
             <h3>Wynncraft Item Database<sup>Made by Empty2k12 for the Wynncraft Content Contest</sup></h3> 
-            <p class="search_desc">You  may search either by name, minimum level or type:</p> 
+            <p class="search_desc">You  may search either by name, minimum level, type or class:Classname (e.g. class:DarkWizard):</p> 
             <form  method="get" action="index.php" class="searchform"> 
                 <input type="text" name="query"> 
                 <input type="submit" value="Find"> 
@@ -24,7 +23,19 @@
             <?php
             error_reporting(0);
 
-            $returnedJson = get_page_contents('http://api.wynncraft.com/public_api.php?action=items&command=' . urlencode($_GET['query']) . '');
+            if (strcasecmp(get_query(), "class:Assassin") == 0 || strcasecmp(get_query(), "class:Ninja") == 0) {
+                $query = "Shears";
+            } else if (strcasecmp(get_query(), "class:Archer") == 0 || strcasecmp(get_query(), "class:Hunter") == 0) {
+                $query = "Bow";
+            } else if (strcasecmp(get_query(), "class:DarkWizard") == 0 || strcasecmp(get_query(), "class:Mage") == 0) {
+                $query = "Stick";
+            } else if (strcasecmp(get_query(), "class:Warrior") == 0 || strcasecmp(get_query(), "class:Knight") == 0) {
+                $query = "Shovel";
+            } else {
+                $query = urlencode(get_query());
+            }
+
+            $returnedJson = get_page_contents('http://api.wynncraft.com/public_api.php?action=items&command=' . $query);
 
             $decoded = json_decode($returnedJson, true);
 
@@ -91,6 +102,10 @@
                 } else {
                     return file_get_contents($url);
                 }
+            }
+            
+            function get_query() {
+                return urldecode($_GET['query']);
             }
             ?>
         </div>

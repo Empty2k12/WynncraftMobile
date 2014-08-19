@@ -165,34 +165,165 @@ h3 > sup {
     font-size: 20px;
 }
 
-//jQuery-qTip2 specific styling:
-.identification {
+.qtip {
+    box-shadow: none;
+    direction: ltr;
+    display: none;
     font-size: 15px;
+    left: -28000px;
+    line-height: 15px;
+    max-width: 280px;
+    min-width: 50px;
+    padding: 0;
+    position: absolute;
+    top: -28000px;
+}
+
+.qtip-content {
+    overflow: hidden;
+    padding: 5px 9px;
+    position: relative;
+    text-align: left;
+    word-wrap: break-word;
 }
 
 .qtip-titlebar {
-    background-color: #4c6e99 !important;
-    padding: 10px;
+    border-width: 0 0 1px;
+    font-weight: 700;
+    overflow: hidden;
+    padding: 5px 35px 5px 10px;
+    position: relative;
 }
 
-.qtip-title {
-    font-size: 17px;
-    color: white !important;
+.qtip-titlebar+.qtip-content {
+    border-top-width: 0!important;
 }
 
-.qtip-tip {
-    background-color: white !important;
+.qtip-close {
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    outline: medium none;
+    position: absolute;
+    right: -9px;
+    top: -9px;
 }
 
-.qtip {
-    background-color: white !important;
-    border-color: #363636 !important;
-    font-size: 15px !important;
+.qtip-titlebar .qtip-close {
+    margin-top: -9px;
+    right: 4px;
+    top: 50%;
 }
 
-.ui-tooltip-light .qtip-content {
-    background-image: url(../img/system/pfeil_hellblau.png);
-    background-repeat: no-repeat;
-    background-position: center top;
-    padding-top: 15px;
+* html .qtip-titlebar .qtip-close {
+    top: 16px;
+}
+
+.qtip-titlebar .ui-icon,.qtip-icon .ui-icon {
+    direction: ltr;
+    display: block;
+    text-indent: -1000em;
+}
+
+.qtip-icon,.qtip-icon .ui-icon {
+    border-radius: 3px;
+    moz-border-radius: 3px;
+    text-decoration: none;
+    webkit-border-radius: 3px;
+}
+
+.qtip-icon .ui-icon {
+    background: transparent none no-repeat -100em -100em;
+    color: inherit;
+    font: 400 bold 10px/13px Tahoma,sans-serif;
+    height: 14px;
+    line-height: 14px;
+    text-align: center;
+    text-indent: 0;
+    width: 18px;
+}
+
+.qtip-default {
+    background-color: #888;
+    border-color: #333;
+    border-style: solid;
+    border-width: 1px;
+    color: #E2E2E2;
+}
+
+.qtip-default .qtip-titlebar {
+    background-color: #333;
+}
+
+.qtip-default .qtip-icon {
+    background: #F1F1F1;
+    border-color: #CCC;
+    color: #777;
+}
+
+.qtip-default .qtip-titlebar .qtip-close {
+    border-color: #AAA;
+    color: #111;
+}
+
+.qtip:not(.ie9haxors) div.qtip-content, .qtip:not(.ie9haxors) div.qtip-titlebar {
+    filter: none;
+    ms-filter: none;
+}
+
+.qtip .qtip-tip {
+    margin: 0 auto;
+    overflow: hidden;
+    z-index: 10;
+}
+
+x:-o-prefocus, .qtip .qtip-tip {
+    visibility: hidden;
+}
+
+.qtip .qtip-tip,.qtip .qtip-tip .qtip-vml,.qtip .qtip-tip canvas {
+    background: transparent;
+    border: 0 dashed transparent;
+    color: #123456;
+    position: absolute;
+}
+
+.qtip .qtip-tip canvas {
+    left: 0;
+    top: 0;
+}
+
+.qtip .qtip-tip .qtip-vml {
+    behavior: url(#default#VML);
+    display: inline-block;
+    visibility: visible;
+}
+
+#qtip-overlay {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+#qtip-overlay.blurs {
+    cursor: pointer;
+}
+
+#qtip-overlay div {
+    background-color: #000;
+    filter: alpha(opacity=70);
+    height: 100%;
+    left: 0;
+    ms-filter: "alpha(Opacity=70)";
+    opacity: .7;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.qtipmodal-ie6fix {
+    position: absolute!important;
 }
