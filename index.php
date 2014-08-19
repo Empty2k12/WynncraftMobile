@@ -11,8 +11,21 @@
     </head>
     <body>
         <div class="searchwrapper">
-            <h3>Wynncraft Item Database<sup>Made by Empty2k12 for the Wynncraft Content Contest</sup></h3> 
-            <p class="search_desc">You  may search either by name, minimum level, type or class:Classname (e.g. class:DarkWizard):</p> 
+            <h3><a href="index.php">Wynncraft Item Database</a><sup>Made by Empty2k12 for the Wynncraft Content Contest</sup></h3> 
+            
+            <div class='spoilerwrapper'>
+                <input class="spoilertoggle" type='button' value='What to search?'>
+                <div class='spoiler' style='display: none; overflow: hidden;'>
+                    You may either search by:
+                    <ul>
+                        <li>Name (e.g. <a href="index.php?query=Adamantite">Admantite</a> or <a href="index.php?query=Ado+Saki">Ado Saki</a>)</li>
+                        <li>Minimum Level (e.g. <a href="index.php?query=75">75</a> returns all Bob's Weapons)</li>
+                        <li>Type (e.g. <a href="index.php?query=Shovel">Shovel</a> or <a href="index.php?query=Stick">Stick</a>)</li>
+                        <li>Class (e.g. <a href="index.php?query=class:DarkWizard">class:DarkWizard</a>)</li>
+                    </ul>
+                </div>  
+            </div>
+            
             <form  method="get" action="index.php" class="searchform"> 
                 <input type="text" name="query"> 
                 <input type="submit" value="Find"> 
@@ -103,7 +116,7 @@
                     return file_get_contents($url);
                 }
             }
-            
+
             function get_query() {
                 return urldecode($_GET['query']);
             }

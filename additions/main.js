@@ -16,8 +16,15 @@ function initTooltips() {
     });
 }
 
+function initSpoiler() {
+    jQuery('.spoilertoggle').click(function() {
+        jQuery('.spoiler').stop(true, false).slideToggle();
+    });
+}
+
 function initPage() {
     initTooltips();
+    initSpoiler();
 }
 
 jQuery(document).ready(initPage);

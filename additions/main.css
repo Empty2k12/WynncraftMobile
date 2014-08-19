@@ -68,8 +68,16 @@
     }
 }
 
+* {
+    outline: 0 none;
+}
+
 html, body {
     font-family: Arial, Calibri;
+}
+
+ul, li {
+    margin: 0;
 }
 
 .header_legendary {
@@ -141,7 +149,7 @@ searchform input {
     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-.searchform input[type=submit] {
+.searchform input[type=submit], .spoilertoggle {
     height: 35px;
     background: #FFF;
     border: 1px solid #CCC;
@@ -150,7 +158,7 @@ searchform input {
     font-size: 14px;
 }
 
-.searchform input[type=submit]:hover {
+.searchform input[type=submit]:hover, .spoilertoggle:hover {
     color: #333;
     background-color: #0266C8;
     border-color: #ADADAD;
@@ -183,6 +191,15 @@ h3 > a:visited {
 
 h3 > a:hover {
     text-decoration: none;
+}
+
+.spoiler {
+    display: none;
+    padding: 5px;
+}
+
+.spoilerwrapper {
+    margin: 15px 0px 15px 0px;
 }
 
 .qtip {
